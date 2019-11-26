@@ -16,6 +16,9 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, '../client/build')));
 
+//routes
+app.use('/',require('./routes/index'));
+
 process.env.PORT = process.env.PORT || 4000; 
 
 app.listen(process.env.PORT,() => {
