@@ -11,7 +11,7 @@ router.route('/place')
         res.json({msg: 'Route place post'})
     })
 
-    .update((req,res) => {
+    .put((req,res) => {
         res.json({msg: 'Route place update'})
     })
 

@@ -11,7 +11,7 @@ router.route('/game')
         res.json({msg: 'Route game post'})
     })
 
-    .update((req,res) => {
+    .put((req,res) => {
         res.json({msg: 'Route game update'})
     })
 

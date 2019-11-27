@@ -1,23 +1,21 @@
 const {Router} = require('express'),
+      teamController = require('../controllers/team.controller'),    
       router = Router(); 
-      
-router.route('/team')
-    
-    .get((req, res) => {
-        res.json({msg: 'Route team get'})
-    })
 
-    .post((req,res) => {
-        res.json({msg: 'Route team post'})
-    })
+//get all      
+router.get('/team', teamController.get)
 
-    .update((req,res) => {
-        res.json({msg: 'Route team update'})
-    })
+//get one
+router.get('/team/:id', teamController.getOne)
 
-    .delete((req,res) => {
-        res.json({msg: 'Route team delete'})
-    })
+//create
+router.post('/team', teamController.create)
+
+//modification
+router.put('/team/:id', teamController.update)
+
+//delete
+router.delete('/team/:id', teamController.delete)
 
 module.exports = router;
 

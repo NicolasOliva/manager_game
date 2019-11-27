@@ -11,7 +11,7 @@ router.route('/user')
         res.json({msg: 'Route user post'})
     })
 
-    .update((req,res) => {
+    .put((req,res) => {
         res.json({msg: 'Route user update'})
     })
 
