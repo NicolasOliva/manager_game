@@ -1,6 +1,7 @@
 const Team = require('../models/team.model'),
       _ = require('underscore');
 
+      
 exports.get = async (req, res) => {
     try {
         const teams = await Team.find()

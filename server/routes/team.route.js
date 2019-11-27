@@ -2,6 +2,7 @@ const {Router} = require('express'),
       teamController = require('../controllers/team.controller'),    
       router = Router(); 
 
+      
 //get all      
 router.get('/team', teamController.get)
 
