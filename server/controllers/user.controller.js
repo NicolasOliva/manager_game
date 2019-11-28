@@ -2,11 +2,18 @@ const User = require('../models/user.model'),
       _ = require('underscore');
 
 exports.get = async (req, res) => {
-    const users = await User.find({state: true});
-    res.json({
-        status: 'true',
-        users
-    });
+    try {
+        const users = await User.find({state: true});
+        res.json({
+            status: 'true',
+            users
+        });
+    } catch (error) {
+        res.json({
+            status: 'false',
+            error
+        });
+    }
 }
 
 exports.getOne = async (req, res) => {
@@ -14,7 +21,7 @@ exports.getOne = async (req, res) => {
         const user = await User.findById({_id: req.params.id, state: true});
         if(!user){
             res.json({
-                status: 'true',
+                status: 'false',
                 message: 'User not found'
             });
         } else {
@@ -76,7 +83,7 @@ exports.delete = async (req, res) => {
             console.log(user_deleted);
             if(!user_deleted){
                 res.json({
-                    state: 'true',
+                    state: 'false',
                     message: 'User not found'
                 })            
             } else {
