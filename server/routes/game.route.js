@@ -1,23 +1,22 @@
 const {Router} = require('express'),
+      gameController = require('../controllers/game.controller'),  
       router = Router(); 
       
-router.route('/game')
     
-    .get((req, res) => {
-        res.json({msg: 'Route game get'})
-    })
+//get all      
+router.get('/game', gameController.get)
 
-    .post((req,res) => {
-        res.json({msg: 'Route game post'})
-    })
+//get one
+router.get('/game/:id', gameController.getOne)
 
-    .put((req,res) => {
-        res.json({msg: 'Route game update'})
-    })
+//create
+router.post('/game', gameController.create)
 
-    .delete((req,res) => {
-        res.json({msg: 'Route game delete'})
-    })
+//modification
+router.put('/game/:id', gameController.update)
+
+//delete
+router.delete('/game/:id', gameController.delete)
 
 module.exports = router;
 

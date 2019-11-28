@@ -8,14 +8,22 @@ if(min < 10){min = '0' + min;}
 const date = `${d.getDate()}/${(d.getMonth() +1)}/${d.getFullYear()}  ${d.getHours()}:${min} hs.`;
 
 const gameSchema = mongoose.Schema({
-    date: {type: Date, default: date},
-    local: {type: Schema.Types.ObjectId, ref: 'User', unique: true, required: [true, 'The user is necessary']},
-    visitant: {type: Schema.Types.ObjectId, ref: 'User', unique: true, required: [true, 'The user is necessary']},
+    date: {type: String, default: date},
+    local: {type: mongoose.Schema.Types.ObjectId, ref: 'users', required: [true, 'The user is necessary']},
+    visitant: {type: mongoose.Schema.Types.ObjectId, ref: 'users', required: [true, 'The user is necessary']},
+    team_local: {type: mongoose.Schema.Types.ObjectId, ref: 'teams', required: [true, 'The team is necessary']},
+    team_visitant: {type: mongoose.Schema.Types.ObjectId, ref: 'teams', required: [true, 'The team is necessary']},
     goals_local: {type: Number, required: [true, 'The goals is necessary']},
     goals_visitant: {type: Number, required: [true, 'The goals is necessary']},
-    state: {Type: Boolean, default: true, required: [true, 'The state is required']}
+    state: {type: Boolean, default: true, required: [true, 'The state is required']}
 });
 
-gameSchema.plugion(uniqueValidator, '{PHAT} must be unique');
+gameSchema.methods.toJSON = function() { //(toJSON) NODE AUTOMATIC FUNCTION : the endpoint always return object json whitout the password and state
+    var obj = this.toObject();
+    delete obj.state;
+    return obj;
+}
 
-module.exports = mongoose.model('Teams', gameSchema);
+gameSchema.plugin(uniqueValidator, '{PHAT} must be unique');
+
+module.exports = mongoose.model('Games', gameSchema);
