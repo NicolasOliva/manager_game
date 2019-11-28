@@ -10,6 +10,13 @@ const placeSchema = mongoose.Schema({
     state: {type: Boolean, default: true, required: [true, 'The state is required']}
 }); 
 
+gameSchema.methods.toJSON = function() { //(toJSON) NODE AUTOMATIC FUNCTION : the endpoint always return object json whitout the password and state
+    var obj = this.toObject();
+    delete obj.state;
+    return obj;
+}
+
+
 placeSchema.plugin(uniqueValidator,{message: '[PHAT] must be unique'}); 
 
 module.exports = mongoose.model('Places', placeSchema);

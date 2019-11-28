@@ -4,7 +4,7 @@ const mongoose = require('mongoose'),
 // date
 const d = new Date(),
       min = d.getMinutes();
-if(min < 10){min = '0' + min;}
+if(min < 10){min == '0' + min;}
 const date = `${d.getDate()}/${(d.getMonth() +1)}/${d.getFullYear()}  ${d.getHours()}:${min} hs.`;
 
 const gameSchema = mongoose.Schema({
@@ -15,6 +15,7 @@ const gameSchema = mongoose.Schema({
     team_visitant: {type: mongoose.Schema.Types.ObjectId, ref: 'teams', required: [true, 'The team is necessary']},
     goals_local: {type: Number, required: [true, 'The goals is necessary']},
     goals_visitant: {type: Number, required: [true, 'The goals is necessary']},
+    place: {type: mongoose.Schema.Types.ObjectId, ref: 'places', required: [true, 'The place is necessary']}, //the games will belong to a place
     state: {type: Boolean, default: true, required: [true, 'The state is required']}
 });
 

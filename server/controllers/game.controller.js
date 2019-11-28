@@ -50,7 +50,7 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
     try {
-        const game = _.pick(req.body, ['local','visitant', 'goals_local', 'goals_visitant']);
+        const game = _.pick(req.body, ['local','visitant', 'goals_local', 'goals_visitant', 'place']); //it allow not modificate other fields (state for example)
         const new_game = await Game.findByIdAndUpdate({_id: req.params.id, state: true}, game, {new: true});
         if(!new_game){
             res.json({
