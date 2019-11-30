@@ -19,7 +19,7 @@ exports.get = async (req, res) => {
 
 exports.getOne = async (req, res) => {
     try {
-        const game = await Game.findById({_id: req.params.id, state: true})
+        const game = await Game.findOne({_id: req.params.id, state: true})
         res.json({
             state: 'true',
             game
@@ -51,7 +51,7 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
     try {
         const game = _.pick(req.body, ['local','visitant', 'goals_local', 'goals_visitant', 'place']); //it allow not modificate other fields (state for example)
-        const new_game = await Game.findByIdAndUpdate({_id: req.params.id, state: true}, game, {new: true});
+        const new_game = await Game.findOneAndUpdate({_id: req.params.id, state: true}, game, {new: true});
         if(!new_game){
             res.json({
                 state: 'false',
@@ -73,7 +73,7 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
     try {
-        const game_removed = await Game.findByIdAndUpdate({_id: req.params.id, state: true}, {state: 'false'}, {new: true})
+        const game_removed = await Game.findOneAndUpdate({_id: req.params.id, state: true}, {state: 'false'}, {new: true})
         if(!game_removed){
             res.json({
                 state: 'false',

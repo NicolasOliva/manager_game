@@ -1,23 +1,22 @@
 const {Router} = require('express'),
+      placeController = require('../controllers/place.controller'),
       router = Router(); 
       
-router.route('/place')
-    
-    .get((req, res) => {
-        res.json({msg: 'Route place get'})
-    })
+//get all      
+router.get('/place', placeController.get)
 
-    .post((req,res) => {
-        res.json({msg: 'Route place post'})
-    })
+//get one
+router.get('/place/:id', placeController.getOne)
 
-    .put((req,res) => {
-        res.json({msg: 'Route place update'})
-    })
+//create
+router.post('/place', placeController.create)
 
-    .delete((req,res) => {
-        res.json({msg: 'Route place delete'})
-    })
+//modification
+router.put('/place/:id', placeController.update)
+
+//delete
+router.delete('/place/:id', placeController.delete)
+
 
 module.exports = router;
 

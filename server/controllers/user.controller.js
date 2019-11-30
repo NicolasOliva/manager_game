@@ -18,7 +18,7 @@ exports.get = async (req, res) => {
 
 exports.getOne = async (req, res) => {
     try {
-        const user = await User.findById({_id: req.params.id, state: true});
+        const user = await User.findOne({_id: req.params.id, state: true});
         if(!user){
             res.json({
                 status: 'false',
@@ -57,7 +57,7 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
     try {
         const data = _.pick(req.body,['username','email','password'])
-        const new_user = await User.findByIdAndUpdate({_id: req.params.id, state: true}, data, {new: true})
+        const new_user = await User.findOneAndUpdate({_id: req.params.id, state: true}, data, {new: true})
         if(!new_user){ // user not found
             res.json({
                 state: 'false',

@@ -9,8 +9,8 @@ const userSchema = mongoose.Schema({
     state: {type: Boolean, default: true, required: [true, 'The state is required']}
 }); 
 
-userSchema.pre(['save', 'findByIdAndUpdate'], async function () {
-    if(this._update) { // for findByIdAndUpdate
+userSchema.pre(['save', 'findOneAndUpdate'], async function () {
+    if(this._update) { // for findOneAndUpdate
         this._update.password = await bcrypt.hashSync(this._update.password, 10)
     }else { //for Save
         this.password = await bcrypt.hashSync(this.password, 10)

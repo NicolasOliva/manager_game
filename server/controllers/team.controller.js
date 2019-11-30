@@ -19,7 +19,7 @@ exports.get = async (req, res) => {
 
 exports.getOne = async (req, res) => {
     try {
-        const team = await Team.findById({_id: req.params.id, state: true})
+        const team = await Team.findOne({_id: req.params.id, state: true})
         res.json({
             state: 'true',
             team
@@ -51,7 +51,7 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
     try {
         const team = _.pick(req.body, ['name']);
-        const new_team = await Team.findByIdAndUpdate({_id: req.params.id, state: true}, team, {new: true});
+        const new_team = await Team.findOneAndUpdate({_id: req.params.id, state: true}, team, {new: true});
         if(!new_team){
             res.json({
                 state: 'false',
@@ -73,7 +73,7 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
     try {
-        const teamRemove = await Team.findByIdAndUpdate({_id: req.params.id, state: true}, {state: 'false'}, {new: true})
+        const teamRemove = await Team.findOneAndUpdate({_id: req.params.id, state: true}, {state: 'false'}, {new: true})
         if(!teamRemove){
             res.json({
                 state: 'false',
