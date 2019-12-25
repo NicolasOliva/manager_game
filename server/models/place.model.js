@@ -17,7 +17,7 @@ placeSchema.pre('save', function (next) { //validation arrays users and admins. 
     next()    
 });
 
-placeSchema.methods.toJSON = function() { //(toJSON) NODE AUTOMATIC FUNCTION : the endpoint always return object json whitout the password and state
+placeSchema.methods.toJSON = function() { //(toJSON) NODE AUTOMATIC FUNCTION : the endpoint always return object json whitout the state
     var obj = this.toObject();
     delete obj.state;
     return obj;

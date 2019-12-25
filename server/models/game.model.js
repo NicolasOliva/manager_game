@@ -19,7 +19,7 @@ const gameSchema = mongoose.Schema({
     state: {type: Boolean, default: true, required: [true, 'The state is required']}
 });
 
-gameSchema.methods.toJSON = function() { //(toJSON) NODE AUTOMATIC FUNCTION : the endpoint always return object json whitout the password and state
+gameSchema.methods.toJSON = function() { //(toJSON) NODE AUTOMATIC FUNCTION : the endpoint always return object json whitout the state
     var obj = this.toObject();
     delete obj.state;
     return obj;
