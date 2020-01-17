@@ -1,4 +1,5 @@
 const User = require('../models/user.model'),
+      Game = require('../models/game.model'),
       _ = require('underscore');
 
 exports.get = async (req, res) => {
@@ -98,4 +99,38 @@ exports.delete = async (req, res) => {
                 message: error
             })            
         }
+}
+
+exports.getGames = async (req, res) => {
+    try {
+       
+        const user = await User.findOne({_id:req.params.id, state:true});
+        if(!user){ //if user is in state false
+            res.json({
+                status: 'false', 
+                message: 'User not found'
+            })
+        }else{
+            const games = await Game.find({$or:[{local: user._id}, {visitant: user._id}], state:true}); //search all user matches as local or visitant
+            if(_.isEmpty(games)){ // if has not matches
+                res.json({
+                    status:'false',
+                    message: "This user has not matches"
+                })
+            }else {
+                res.json({
+                    status:'true',
+                    games
+                })
+            }
+        }
+    
+    } catch (error) {
+    
+        res.json({
+            status: 'false',
+            message: error
+        });
+    
+    }
 }
