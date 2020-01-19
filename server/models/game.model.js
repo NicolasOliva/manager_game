@@ -11,8 +11,8 @@ const gameSchema = mongoose.Schema({
     date: {type: String, default: date},
     local: {type: mongoose.Schema.Types.ObjectId, ref: 'users', required: [true, 'The user is necessary']},
     visitant: {type: mongoose.Schema.Types.ObjectId, ref: 'users', required: [true, 'The user is necessary']},
-    team_local: {type: mongoose.Schema.Types.ObjectId, ref: 'teams', required: [true, 'The team is necessary']},
-    team_visitant: {type: mongoose.Schema.Types.ObjectId, ref: 'teams', required: [true, 'The team is necessary']},
+    team_local: {type: String, required: [true, 'The team is necessary']},
+    team_visitant: {type: String, required: [true, 'The team is necessary']},
     goals_local: {type: Number, required: [true, 'The goals is necessary']},
     goals_visitant: {type: Number, required: [true, 'The goals is necessary']},
     place: {type: mongoose.Schema.Types.ObjectId, ref: 'places', required: [true, 'The place is necessary']}, //the games will belong to a place
