@@ -111,7 +111,10 @@ exports.getGames = async (req, res) => {
                 message: 'User not found'
             })
         }else{
-            const games = await Game.find({$or:[{local: user._id}, {visitant: user._id}], state:true}); //search all user matches as local or visitant
+            const games = await Game.find({$or:[{local: user._id}, {visitant: user._id}], state:true}) //search all user matches as local or visitant
+                                    .populate([{path: 'local', model: User}, {path: 'visitant', model: User}])
+                                    .exec();        
+            
             if(_.isEmpty(games)){ // if has not matches
                 res.json({
                     status:'false',

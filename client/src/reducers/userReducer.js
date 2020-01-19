@@ -9,9 +9,10 @@ import {
 }from '../types';
 
 const initialState = {
-    name: '',
+    username: '',
     games: [],
-    error: null
+    error_user: null,
+    error_games: null
 }
 
 export default function (state = initialState, action) {
@@ -19,34 +20,34 @@ export default function (state = initialState, action) {
         case DOWNLOAD_USERNAME: 
             return {
                 ...state,
-                error: null
+                error_user: null
             }
         case DOWNLOAD_USERNAME_SUCCESS: 
         return {
             ...state,
             username: action.payload,
-            error: false
+            error_user: false
         }
         case DOWNLOAD_USERNAME_ERROR: 
         return {
             ...state,
-            error: true
+            error_user: true
         }
         case DOWNLOAD_USER_GAMES: 
         return {
             ...state,
-            error: null
+            error_games: null
         }
         case DOWNLOAD_USER_GAMES_SUCCESS: 
         return {
             ...state,
             games: action.payload,
-            error: false
+            error_games: false
         }
         case DOWNLOAD_USER_GAMES_ERROR: 
         return {
             ...state,
-            error: true
+            error_games: true
         }
         default :
         return state

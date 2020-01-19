@@ -13,7 +13,7 @@ const Difference = ({id_user}) => {
         dispatch(getDifference(id_user,id_opponent));
     }
 
-    return (
+    return (    
         <Fragment>
             <div className="row">
                 <div className="col-md-12 text-light box-standard">

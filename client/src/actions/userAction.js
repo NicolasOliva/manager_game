@@ -42,9 +42,15 @@ export const downloadUsernameError = () => ({
 export function getGames(id) {
     return dispatch => {
         dispatch(downloadGames())
-        clientAxios.get(`/users/${id}/games`)
+        clientAxios.get(`/user/${id}/games`)
             .then(res => {
-                dispatch(downloadGamesSuccess(res.data.user))
+                console.log(res)
+                if(res.data.status == 'true'){ // if the state is true, is becouse there are games
+                    
+                    dispatch(downloadGamesSuccess(res.data.games))
+                }else { // else send null at the games of the state of the user
+                    dispatch(downloadGamesSuccess(null))
+                }
             })
             .catch(err => {
                 dispatch(downloadGamesError())
