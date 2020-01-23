@@ -7,7 +7,7 @@ const Difference = ({id_user}) => {
 
     const dispatch = useDispatch();
     const users = useSelector(state => state.users.users);
-    const {difference_games, games_win, games_lost, games_tied, difference_goals, goals, goals_against} = useSelector(state => state.differences.differences);
+    const {win, lose, tied, goals, goals_against, status} = useSelector(state => state.differences.differences);
 
     const loadDifference = (id_user, id_opponent) => {
         dispatch(getDifference(id_user,id_opponent));
@@ -42,13 +42,13 @@ const Difference = ({id_user}) => {
                     </div>
                     <div className="row">
                             <div className="col-8">
-                                <p className="font-weight-bold">Win games:&nbsp; <span className="font-weight-normal">{games_win}</span></p>
-                                <p className="font-weight-bold">Lost games:&nbsp; <span className="font-weight-normal">{games_lost}</span></p>
-                                <p className="font-weight-bold">Tied games:&nbsp; <span className="font-weight-normal">{games_tied}</span></p>
+                                <p className="font-weight-bold">Win games:&nbsp; <span className="font-weight-normal">{win}</span></p>
+                                <p className="font-weight-bold">Lost games:&nbsp; <span className="font-weight-normal">{lose}</span></p>
+                                <p className="font-weight-bold">Tied games:&nbsp; <span className="font-weight-normal">{tied}</span></p>
                             </div>
                             <div className="col-4">
-                                {(difference_games != null) 
-                                    ? <h2 className="p-2">{difference_games}</h2> 
+                                {(status == 'true') 
+                                    ? <h2 className="p-2">{win - lose}</h2> 
                                     : <h2 className="p-2">-</h2> }
                             </div>
                         </div>
@@ -63,7 +63,10 @@ const Difference = ({id_user}) => {
                                 <p className="font-weight-bold">goals against:&nbsp; <span className="font-weight-normal">{goals_against}</span></p>
                             </div>
                             <div className="col-4">
-                                <h2 className="p-2">{difference_goals}</h2> 
+                                {(status == 'true') 
+                                    ? <h2 className="p-2">{goals - goals_against}</h2> 
+                                    : <h2 className="p-2"> - </h2>
+                                }
                             </div>
                         </div>        
                                 

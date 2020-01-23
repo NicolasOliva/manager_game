@@ -1,10 +1,13 @@
 const Game = require('../models/game.model'),
+      User = require('../models/user.model'),
       _ = require('underscore');
 
       
 exports.get = async (req, res) => { 
     try {
         const games = await Game.find({state: true})
+                                .populate([{path: 'local', model: User}, {path: 'visitant', model: User}])
+                                .exec()
         res.json({
             state: 'true',
             games

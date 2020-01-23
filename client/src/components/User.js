@@ -32,8 +32,8 @@ const User = (props) => {
                 </div>
                 <div className="row justify-content-between">
                     <div className="col-md-8 my-5 col-games">
-                        <div className="row">
-                            <div className="col-md-10">
+                        <div className="row justigy-content-center">
+                            <div className="col">
                                 <h3 className="subtittle-user">Games</h3>
                             </div>
                         </div>

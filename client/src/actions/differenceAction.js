@@ -9,9 +9,9 @@ import clientAxios from '../config/axios';
 export const getDifference = (id, id_opponent) => {
     return dispatch => {
         dispatch(downloadDifference())
-        clientAxios.get(`/users/${id}/difference/${id_opponent}`)
-            .then(res => {
-                dispatch(downloadDifferenceSuccess(res.data.difference[0]))
+        clientAxios.get(`/user/${id}/difference/${id_opponent}`)
+        .then(res => {
+                dispatch(downloadDifferenceSuccess(res.data))
             })
             .catch(err => {
                 dispatch(downloadDifferenceError())

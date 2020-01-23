@@ -5,7 +5,7 @@ const Game = ({Game}) => {
     const {_id, date, local, visitant, team_local, team_visitant, goals_local, goals_visitant} = Game;
 
     return (
-        <div className="row">
+        <div className="row justify-content-center">
             <div className="col-md-10 text-uppercase box-standard text-light ">
                 <div className="row">
                     <div className="col-md-6">
@@ -16,12 +16,12 @@ const Game = ({Game}) => {
                     <div className="col-md-6">
                         <p className="font-weight-bold">local:&nbsp; <span className="font-weight-normal">{local.username}</span></p>
                         <p className="font-weight-bold">goals_local:&nbsp; <span className="font-weight-normal">{goals_local}</span></p>
-                        <p className="font-weight-bold">team:&nbsp; <span className="font-weight-normal">{team_local}</span></p>
+                        <p className="font-weight-bold">team_local:&nbsp; <span className="font-weight-normal">{team_local}</span></p>
                     </div>
                     <div className="col-md-6">
-                        <p className="font-weight-bold">opponent:&nbsp; <span className="font-weight-normal">{visitant.username}</span></p>
+                        <p className="font-weight-bold">visitant:&nbsp; <span className="font-weight-normal">{visitant.username}</span></p>
                         <p className="font-weight-bold">goals_visitant:&nbsp; <span className="font-weight-normal">{goals_visitant}</span></p>
-                        <p className="font-weight-bold">team_opponent:&nbsp; <span className="font-weight-normal">{team_visitant}</span></p>
+                        <p className="font-weight-bold">team_visitant:&nbsp; <span className="font-weight-normal">{team_visitant}</span></p>
                     </div>
                 </div>
             </div>

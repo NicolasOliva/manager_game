@@ -20,5 +20,8 @@ router.delete('/user/:id', userController.delete)
 //all user games
 router.get('/user/:id/games', userController.getGames)
 
+//difference whit other user
+router.get('/user/:id/difference/:id_opponent', userController.getDifference)
+
 module.exports = router;
 

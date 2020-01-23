@@ -137,3 +137,83 @@ exports.getGames = async (req, res) => {
     
     }
 }
+
+exports.getDifference = async (req, res) => {
+    try {
+        const user = await User.findOne({_id: req.params.id, state: true});
+        if(!user){ //if user is in state false
+            res.json({
+                status: 'false', 
+                message: 'User not found'
+            })
+        }else{
+            const opponent = await User.findOne({_id: req.params.id_opponent, state: true});
+            if(!opponent){ //if opponent is in state false
+                res.json({
+                    status: 'false', 
+                    message: 'opponent not found'
+                })
+            }else{
+                const games = await Game.find( {$and : [ { $or : [ {local: user._id}, {visitant: user._id} ] },
+                                                         { $or : [ {local: opponent._id}, {visitant: opponent._id} ] } ] 
+                                                       , state: true });
+
+                if(_.isEmpty(games)){ // if has not matches
+                    res.json({
+                        status:'false',
+                        message: "No matches"
+                    })
+                }else {
+
+                    let win = 0, lose = 0, tied = 0, goals = 0, goals_against = 0;
+                        
+                    games.forEach(game => {
+                        
+                        if(game.goals_local > game.goals_visitant){ // win
+                          
+                            if(String(game.local) == user._id){
+                                win++; 
+                                goals = goals + game.goals_local;
+                                goals_against = goals_against + game.goals_visitant;
+                            }else{
+                                lose++;
+                                goals = goals + game.goals_local;
+                                goals_against = goals_against + game.goals_visitant;
+                            }
+                        
+                        }else if(game.goals_local < game.goals_visitant){ // lose
+                          
+                            if(String(game.local) == user._id){
+                                lose++; 
+                                goals = goals + game.goals_local;
+                                goals_against = goals_against + game.goals_visitant;
+                            }else{
+                                win++;
+                                goals = goals + game.goals_local;
+                                goals_against = goals_against + game.goals_visitant;
+                            }
+                       
+                        }else { //tied
+                            tied++;
+                            goals = goals + game.goals;
+                            goals_against = goals_against + game.goals_visitant;
+                        }
+                        
+                    })                                    
+
+                    res.json({ 
+                        status: 'true',
+                        win, lose, tied, goals, goals_against })
+                }
+
+            }    
+            
+        }
+
+    } catch (error) {
+        res.json({
+            status: 'false',
+            message: error
+        })
+    }
+}

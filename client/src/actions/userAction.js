@@ -44,7 +44,6 @@ export function getGames(id) {
         dispatch(downloadGames())
         clientAxios.get(`/user/${id}/games`)
             .then(res => {
-                console.log(res)
                 if(res.data.status == 'true'){ // if the state is true, is becouse there are games
                     
                     dispatch(downloadGamesSuccess(res.data.games))
