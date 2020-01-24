@@ -173,34 +173,32 @@ exports.getDifference = async (req, res) => {
                           
                             if(String(game.local) == user._id){
                                 win++; 
-                                goals = goals + game.goals_local;
-                                goals_against = goals_against + game.goals_visitant;
+                                goals += game.goals_local;
+                                goals_against += game.goals_visitant;
                             }else{
                                 lose++;
-                                goals = goals + game.goals_local;
-                                goals_against = goals_against + game.goals_visitant;
+                                goals += game.goals_visitant;
+                                goals_against += game.goals_local;
                             }
                         
                         }else if(game.goals_local < game.goals_visitant){ // lose
                           
                             if(String(game.local) == user._id){
                                 lose++; 
-                                goals = goals + game.goals_local;
-                                goals_against = goals_against + game.goals_visitant;
+                                goals += game.goals_local;
+                                goals_against += game.goals_visitant;
                             }else{
                                 win++;
-                                goals = goals + game.goals_local;
-                                goals_against = goals_against + game.goals_visitant;
+                                goals += game.goals_visitant;
+                                goals_against += game.goals_local;
                             }
                        
                         }else { //tied
                             tied++;
-                            goals = goals + game.goals;
-                            goals_against = goals_against + game.goals_visitant;
+                            goals += game.goals_local;
+                            goals_against += game.goals_visitant;
                         }
-                        
                     })                                    
-
                     res.json({ 
                         status: 'true',
                         win, lose, tied, goals, goals_against })

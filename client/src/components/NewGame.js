@@ -8,12 +8,13 @@ import {newGame} from '../actions/gamesAction';
 
 const NewGame = ({history}) => {
 
-    const [goals_1, saveGoals1] = useState(0),
-          [user_1, saveUser1] = useState(''),
-          [team_1, saveTeam1] = useState(''),
-          [goals_2, saveGoals2] = useState(0),
-          [user_2, saveUser2] = useState(''),
-          [team_2, saveTeam2] = useState('');
+    const [goals_local, saveGoals1] = useState(0),
+          [local, saveUser1] = useState(''),
+          [team_local, saveTeam1] = useState(''),
+          [goals_visitant, saveGoals2] = useState(0),
+          [visitant, saveUser2] = useState(''),
+          [team_visitant, saveTeam2] = useState(''),
+          [place, savePlace] = useState('5ddaf50bd5ecfd3d95fd54df'); //for the moment predetermined
   
     const dispatch = useDispatch(),
           users = useSelector(state => state.users.users),
@@ -28,12 +29,13 @@ const NewGame = ({history}) => {
         e.preventDefault();
 
         dispatch(newGame({
-            goals_1,
-            user_1,
-            team_1,
-            goals_2,
-            user_2,
-            team_2
+            goals_local,
+            local,
+            team_local,
+            goals_visitant,
+            visitant,
+            team_visitant,
+            place
         }));
 
         history.push('/')    
@@ -53,9 +55,9 @@ const NewGame = ({history}) => {
                             <div className="row d-flex justify-content-center">
                                 <div className="col-md-6 p-4">
                                     <div class="form-group d-flex justify-content-around">
-                                        <label for="goals_1" className="col-sm-5 text-center col-form-label">Goals:</label>
+                                        <label for="goals_local" className="col-sm-5 text-center col-form-label">Goals:</label>
                                         <div className="col-sm-6">
-                                            <input type="number" className="form-control-plaintext text-light text-center" id="goals_1" value={goals_1} onChange={e => saveGoals1(e.target.value)} required></input>
+                                            <input type="number" className="form-control-plaintext text-light text-center" id="goals_local" value={goals_local} onChange={e => saveGoals1(e.target.value)} required></input>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex justify-content-around">
@@ -64,7 +66,7 @@ const NewGame = ({history}) => {
                                             <select class="form-control select-transparent" id="user" onChange={e => saveUser1(e.target.value)} required>
                                             <option value=''>User</option>
                                                 {users.map(user => (
-                                                   <option value={user.id_user}>{user.name}</option>
+                                                   <option value={user._id}>{user.username}</option>
                                                 ))}
                                             </select>
                                         </div>
@@ -75,7 +77,7 @@ const NewGame = ({history}) => {
                                             <select class="form-control select-transparent" id="team" onChange={e => saveTeam1(e.target.value)} required>
                                                 <option value=''>Team</option>
                                                 {teams.map(team => (
-                                                    <option value={team.id_team}>{team.name}</option>
+                                                    <option value={team.name}>{team.name}</option>
                                                 ))}
                                             </select>
                                         </div>
@@ -85,7 +87,7 @@ const NewGame = ({history}) => {
                                     <div class="form-group d-flex justify-content-around">
                                         <label for="goals_against" className="col-sm-5 text-center col-form-label">Goals against:</label>
                                         <div className="col-sm-6">
-                                            <input type="number" className="form-control-plaintext text-light text-center" id="goals_against" value={goals_2} onChange={e => saveGoals2(e.target.value)} required></input>
+                                            <input type="number" className="form-control-plaintext text-light text-center" id="goals_against" value={goals_visitant} onChange={e => saveGoals2(e.target.value)} required></input>
                                         </div>
                                     </div>
                                     <div class="form-group d-flex justify-content-around">
@@ -94,7 +96,7 @@ const NewGame = ({history}) => {
                                         <select class="form-control select-transparent" id="opponent" onChange={e => saveUser2(e.target.value)} required>
                                                 <option value=''>User</option>
                                                 {users.map(user => (
-                                                   <option value={user.id_user}>{user.name}</option>
+                                                   <option value={user._id}>{user.username}</option>
                                                 ))}
                                             </select>
                                         </div>
@@ -105,7 +107,7 @@ const NewGame = ({history}) => {
                                             <select class="form-control select-transparent" id="team_opponent" onChange={e => saveTeam2(e.target.value)} required>
                                                 <option value=''>Team</option>
                                                 {teams.map(team => (
-                                                    <option value={team.id_team}>{team.name}</option>
+                                                    <option value={team.name}>{team.name}</option>
                                                 ))}
                                             </select>
                                         </div>

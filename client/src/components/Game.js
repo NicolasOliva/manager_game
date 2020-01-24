@@ -2,7 +2,7 @@ import React from 'react'
 
 const Game = ({Game}) => {
 
-    const {_id, date, local, visitant, team_local, team_visitant, goals_local, goals_visitant} = Game;
+    const {date, local, visitant, team_local, team_visitant, goals_local, goals_visitant} = Game;
 
     return (
         <div className="row justify-content-center">

@@ -42,9 +42,9 @@ export const downloadGamesError = () => ({
 export const newGame = (game) => {
     return dispatch => {
         dispatch(createGames())
-        clientAxios.post('/games', game)
+        clientAxios.post('/game', game)
             .then(res => {
-                dispatch(createGameSuccess(game))
+                dispatch(createGameSuccess(res.data.game))
             })
             .catch(err => {
                 dispatch(createGameError())
